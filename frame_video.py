@@ -8,7 +8,7 @@ import asyncio
 
 #this convert video to img
 
-def ascii_frame(filename,start,limited=False):
+def ascii_frame(filename,start,limited=False,h_limit=60,w_limit=35):
     filename = filename
     vidcap = cv2.VideoCapture(f'ytd/{filename}')
     framerate = vidcap.get(cv2.CAP_PROP_FPS)
@@ -26,7 +26,7 @@ def ascii_frame(filename,start,limited=False):
         timenow = time.time() - start
         timesleeped = (60 / framerate) * 0.001
         frames = count/framerate
-        converted_unicode = unicode_img(io_buf,w,h)
+        converted_unicode = unicode_img(io_buf,w,h,h_limit,w_limit)
         txt_pt = f"\n{converted_unicode}\n"
         extrainfo = f"[FPS:{framerate/2} | TimeLapsed: {round(float(timenow),2)} | Frame: {round(float(frames),2)}]"
         #print(txt_pt,extrainfo)
